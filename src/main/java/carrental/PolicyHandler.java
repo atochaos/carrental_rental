@@ -25,6 +25,8 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverPaid_CarRental(@Payload Paid paid){
 
+        System.out.println("@@@@@ wheneverPaid_CarRental ProcStatus : " + paid.getProcStatus());
+
         if(paid.isMe() && "PAID".equals(paid.getProcStatus())){
 
             CarRental carRental = new CarRental();
@@ -45,6 +47,8 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverCarReserved_CarRental(@Payload CarReserved carReserved){
 
+        System.out.println("@@@@@ wheneverCarReserved_CarRental ProcStatus : " + carReserved.getProcStatus());
+
         if(carReserved.isMe() && "RESERVED".equals(carReserved.getProcStatus())  ){
             CarRental carRental = new CarRental();
             carRental.setId(carReserved.getId());
@@ -62,6 +66,8 @@ public class PolicyHandler{
     }
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverPaymentCanceled_CarRentalCancellation(@Payload PaymentCanceled paymentCanceled){
+
+        System.out.println("@@@@@ wheneverPaymentCanceled_CarRentalCancellation ProcStatus : " + paymentCanceled.getProcStatus());
 
         if(paymentCanceled.isMe() && "PAYMENT_CANCELED".equals(paymentCanceled.getProcStatus()) ){
 
@@ -85,6 +91,8 @@ public class PolicyHandler{
     }
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverCarReservationCanceled_CarRentalCancellation(@Payload CarReservationCanceled carReservationCanceled){
+
+        System.out.println("@@@@@ wheneverCarReservationCanceled_CarRentalCancellation ProcStatus : " + carReservationCanceled.getProcStatus());
 
         if(carReservationCanceled.isMe()   && "RESERVATION_CANCELED".equals(carReservationCanceled.getProcStatus())    ){
             CarRental carRental = new CarRental();

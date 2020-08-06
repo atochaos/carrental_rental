@@ -24,10 +24,10 @@ public class CarRental {
 
     @PostUpdate
     public void onPostUpdate(){
-
         CarRented carRented = new CarRented();
         BeanUtils.copyProperties(this, carRented);
         carRented.publishAfterCommit();
+
 
         CarRentalCanceled carRentalCanceled = new CarRentalCanceled();
         BeanUtils.copyProperties(this, carRentalCanceled);
